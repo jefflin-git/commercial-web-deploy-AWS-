@@ -1,6 +1,7 @@
 const db = require('../../models')
 const { Product, Cart } = db
 const { Op } = require('sequelize')
+const query = require('../../db')
 
 let productController = {
   getProducts: async (req, res, callback) => {
@@ -44,6 +45,18 @@ let productController = {
       console.log(error)
       callback({ status: 'error', message: 'error !' })
     }
+
+    // SQL query
+    // try {
+    //   const sql = 'SELECT * FROM products'
+    //   const products = await query(sql)
+    //   console.log(products)
+    //   return callback({ status: 'success', products, totalPrice: 0, totalPage: 3 })
+    // } catch (error) {
+    //   console.log(error)
+    //   callback({ status: 'error', message: 'error !' }
+    //   )
+    // }
   },
   getProduct: async (req, res, callback) => {
     try {
@@ -66,7 +79,22 @@ let productController = {
       console.log(err)
       callback({ status: 'error', message: 'error !' })
     }
+
+    // SQL query
+    // try {
+    //   const cartSql = 'SELECT * FROM carts WHERE id=?'
+    //   const cart = await query(cartSql, [req.session.cartId])
+    //   const productSql = 'SELECT * FROM products WHERE id=?'
+    //   const product = await query(productSql, [req.params.id])
+    //   console.log(cart)
+    //   console.log(product)
+    //   return callback({ status: 'success', product, cart })
+    // } catch (err) {
+    //   console.log(err)
+    //   callback({ status: 'error', message: 'error !' })
+    // }
   }
+
 }
 
 module.exports = productController
