@@ -6,7 +6,7 @@ const doc = {
     title: 'Go shipping REST API'
   },
   definitions: {
-
+    SuccessMessage: { status: 'success', message: 'Success' }
   }
 }
 
