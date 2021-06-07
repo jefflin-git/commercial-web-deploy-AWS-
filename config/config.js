@@ -1,9 +1,14 @@
-{
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
+
+const config = {
   "development": {
-    "username": "root",
-    "password": "password",
-    "database": "commercial",
-    "host": "127.0.0.1",
+    "username": process.env.MYSQL_USER,
+    "password": process.env.MYSQL_ROOT_PASSWORD,
+    "database": process.env.MYSQL_DATABASE,
+    "host": process.env.DB_HOST_IP,
     "dialect": "mysql"
   },
   "test": {
@@ -31,3 +36,5 @@
     "logging": false
   }
 }
+
+module.exports = config

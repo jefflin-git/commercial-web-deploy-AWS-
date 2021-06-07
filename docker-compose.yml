@@ -1,0 +1,35 @@
+version: "3.7"
+services: 
+  mysql-db:
+    container_name: mydb
+    image: mysql:8.0.24
+    ports: 
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    networks:
+      my-bridge-001:
+    volumes:
+      - db-data:/var/lib/mysql
+  server:
+    container_name: server
+    build:
+      context: ./
+    image: catlight/commercial-web
+    command: ./wait-for-it.sh ${URL}:3306 -- npm run dev
+    ports: 
+      - "3000:3000"
+    environment:
+      - DB_HOST_IP=mydb
+    networks:
+      my-bridge-001:
+
+networks:
+  my-bridge-001:
+
+volumes:
+  db-data:
+

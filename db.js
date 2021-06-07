@@ -1,3 +1,6 @@
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 const mysql = require('mysql')
 
 // const pool = mysql.createPool({
@@ -8,10 +11,10 @@ const mysql = require('mysql')
 // })
 
 const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'commercial'
+  host: process.env.DB_HOST_IP,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_ROOT_PASSWORD,
+  database: process.env.MYSQL_DATABASE
 })
 
 const query = (sql, values) => {
